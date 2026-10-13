@@ -348,8 +348,13 @@ export default function Carousel() {
       const target = base + Math.round((state.spin - base) / TAU) * TAU;
 
       const slots = Math.abs(target - state.spin) / slot;
-      // Already there. Opening the project belongs here eventually.
-      if (slots < 0.01) return;
+      // Clicking a front-facing card opens its chapter.
+      if (slots < 0.01) {
+        const imageIndex = ((Math.round(params.imageOffset) - signedOffset(i)) % imageCount + imageCount) % imageCount;
+        const project = PROJECTS[imageIndex];
+        if (project?.slug) window.location.assign(`/chapter/${project.slug}`);
+        return;
+      }
 
       spinVel = 0;
       settling = false;

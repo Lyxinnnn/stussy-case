@@ -40,15 +40,39 @@
   font-display: swap;
 }
 
+/* Default: allow normal page scrolling */
 html,
 body {
-  height: 100%;
   margin: 0;
-  background: #fafafa;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Keep the 3D homepage full-screen */
+body:has(.fixed.inset-0.touch-none) {
+  height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
 }
 
+/* Stussy chapter pages */
+html:has(.stussy-chapter),
+body:has(.stussy-chapter) {
+  height: auto !important;
+  overflow-y: auto !important;
+  overscroll-behavior-y: auto;
+}
+
+/* WebGL canvas */
 canvas {
   display: block;
+}
+
+/* Chapter page */
+.stussy-chapter {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: visible;
 }
